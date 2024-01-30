@@ -92,7 +92,7 @@ class GroceryBillingApp:
         pdf_filename = f"grocery_bill_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
         pdf = canvas.Canvas(pdf_filename)
 
-        pdf.drawString(30, 780, "Grocery Store Bill")
+        pdf.drawString(30, 750, "Grocery Store Bill")
         pdf.line(30, 745, 550, 745)
 
         # Customer details
@@ -101,10 +101,14 @@ class GroceryBillingApp:
         pdf.drawString(30, 700, f"Contact Number: {self.customer_contact_var.get()}")
         pdf.drawString(30, 685, f"Address: {self.customer_address_var.get()}")
 
+        pdf.line(30, 745, 550, 745)
+
         y_position = 660
         for item in self.items:
             pdf.drawString(30, y_position, f"{item['item_name']} - {item['quantity']} x {item['price']} = {item['total_price']}")
             y_position -= 15
+
+        pdf.line(30, 745, 550, 745)
 
         pdf.drawString(30, y_position, f"Total: {self.total_var.get()}")
         pdf.save()
